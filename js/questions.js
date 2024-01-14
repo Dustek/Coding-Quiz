@@ -1,4 +1,4 @@
-const quizQuestions = [
+var quizQuestions = [
     {
       question: "What does HTML stand for?",
       choices: ["Hyper Text Markup Language", "Highly Typed Machine Learning", "Hyper Transferable Language", "Highly Technological Modern Language"],
