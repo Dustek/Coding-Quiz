@@ -5,7 +5,9 @@ var startScreenElement = document.getElementById("start-screen");
 var QuestionContainerElement = document.getElementById("questions");
 var ChoicesElement = document.getElementById("choices");
 var EndElement = document.getElementById("end-screen");
-var scoreElement = document.getElementById("final-score");
+var finalScoreElement = document.getElementById('final-score');
+var initialsInput = document.getElementById('initials');
+var submitButton = document.getElementById('submit');
 var FeedbackElement = document.getElementById("feedback");
 var questionTitle = document.getElementById('question-title')
 var choicesContainer = document.getElementById('choices')
@@ -78,12 +80,42 @@ function handleAnswerClick(selectedAnswer) {
   }
 
 
-
+var userscore
 function endQuiz(){
   QuestionContainerElement.classList.add('hide')
   EndElement.classList.remove('hide')
   clearInterval(timer)
-  var score = timerCount
-  scoreElement.textContent = score
+  var userScore = timerCount
+  finalScoreElement.textContent = userScore
 
 }
+
+submitButton.addEventListener('click', handleScoreSubmission);
+
+function handleScoreSubmission() {
+  var userInitials = initialsInput.value.trim();
+  if (userInitials === '') {
+    alert('Please enter your initials.');
+    return;
+  }
+    var scoreData = {
+      initials: userInitials,
+      score: userscore,
+    };
+    saveScoreToLocalStorage(scoreData);
+  }
+
+function saveScoreToLocalStorage(scoreData){
+  var existingScores
+  var storedScores = localStorage.getItem("scores")
+  if (storedScores) {
+    existingScores = JSON.parse(storedScores);
+  } else {
+    existingScores = []
+  }
+  existingScores.push(scoreData)
+  existingScores.sort((a, b) => b.score - a.score);
+  localStorage.setItem('scores', JSON.stringify(existingScores))
+}
+
+
