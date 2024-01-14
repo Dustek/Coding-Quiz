@@ -5,6 +5,7 @@ var startScreenElement = document.getElementById("start-screen");
 var QuestionContainerElement = document.getElementById("questions");
 var ChoicesElement = document.getElementById("choices");
 var EndElement = document.getElementById("end-screen");
+var scoreElement = document.getElementById("final-score");
 var FeedbackElement = document.getElementById("feedback");
 var questionTitle = document.getElementById('question-title')
 var choicesContainer = document.getElementById('choices')
@@ -78,4 +79,11 @@ function handleAnswerClick(selectedAnswer) {
 
 
 
+function endQuiz(){
+  QuestionContainerElement.classList.add('hide')
+  EndElement.classList.remove('hide')
+  clearInterval(timer)
+  var score = timerCount
+  scoreElement.textContent = score
 
+}
