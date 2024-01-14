@@ -1,6 +1,7 @@
 console.log(quizQuestions)
 var timerElement = document.querySelector(".timer");
 var startElement = document.getElementById("start");
+var startScreenElement = document.getElementById("start-screen");
 var QuestionContainerElement = document.getElementById("questions");
 var ChoicesElement = document.getElementById("choices");
 var EndElement = document.getElementById("end-screen");
@@ -19,6 +20,8 @@ function startQuiz() {
   // renderBlanks()
   startTimer()
   displayQuestion();
+  startScreenElement.classList.add('hide')
+  QuestionContainerElement.classList.remove('hide')
 }
 
 
