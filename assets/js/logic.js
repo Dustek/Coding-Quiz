@@ -16,8 +16,6 @@ startElement.addEventListener('click', startQuiz);
 
 function startQuiz() {
   timerCount = 100;
-  //TODO figure out this function
-  // renderBlanks()
   startTimer()
   displayQuestion();
   startScreenElement.classList.add('hide')
@@ -51,7 +49,7 @@ function handleAnswerClick(selectedAnswer) {
       console.log("Correct!");
     } else {
       // Handle incorrect answer (subtract time, etc.)
-      console.log("Incorrect!");
+      timerCount = timerCount - 10
     }
     currentQuestionIndex++;
     // Checks if there are more questions
