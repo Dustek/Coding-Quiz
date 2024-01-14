@@ -1,3 +1,4 @@
+console.log(quizQuestions)
 var timerElement = document.querySelector(".timer");
 var startElement = document.getElementById("start");
 var QuestionContainerElement = document.getElementById("questions");
@@ -6,16 +7,24 @@ var EndElement = document.getElementById("end-screen");
 var FeedbackElement = document.getElementById("feedback");
 var questionTitle = document.getElementById('question-title')
 var choicesContainer = document.getElementById('choices')
-
-import quizQuestions from './questions.js';
-
-
 var currentQuestionIndex = 0;
 var timer;
 var timerCount; 
 
+startElement.addEventListener('click', startQuiz);
+
+function startQuiz() {
+  timerCount = 100;
+  //TODO figure out this function
+  // renderBlanks()
+  startTimer()
+  displayQuestion();
+}
+
+
 //Displays question and answer buttons
 function displayQuestion() {
+    console.log("questions displayed!")
     var currentQuestion = quizQuestions[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     // Clear previous choices
@@ -46,25 +55,10 @@ function handleAnswerClick(selectedAnswer) {
     if (currentQuestionIndex < quizQuestions.length) {
       displayQuestion();
     } else {
+        //TODO add end to quizz
       endQuiz();
     }
   }
-
-
-
-
-
-function startGame() {
-    isWin = false;
-    timerCount = 100;
-    // Prevents start button from being clicked when round is in progress
-    startButton.disabled = true;
-    //TODO figure out this function
-    renderBlanks()
-    startTimer()
-  }
-
-
 
 
 
@@ -76,8 +70,11 @@ function startGame() {
       timerElement.textContent = timerCount;
       if (timerCount === 0) {
         clearInterval(timer);
-        //TODO make losegame function
-        loseGame();
+        endQuiz();
       }
     }, 1000);
   }
+
+
+
+

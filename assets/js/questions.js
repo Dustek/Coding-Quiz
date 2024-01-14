@@ -25,5 +25,3 @@ var quizQuestions = [
       correctAnswer: "Prints text to the console",
     },
   ];
-
-  export default quizQuestions;
