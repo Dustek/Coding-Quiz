@@ -26,6 +26,13 @@ function startQuiz() {
 }
 
 
+function showFeedback(){
+  FeedbackElement.classList.remove("hide")
+  setTimeout(() => {
+    FeedbackElement.classList.add("hide")
+  }, 2000);
+}
+
 //Displays question and answer buttons
 function displayQuestion() {
     var currentQuestion = quizQuestions[currentQuestionIndex];
@@ -56,12 +63,16 @@ function handleAnswerClick(selectedAnswer) {
     if (selectedAnswer === currentQuestion.correctAnswer) {
       var sound = document.getElementById('sound good');
       sound.play();
+      FeedbackElement.textContent = "Correct"
+      showFeedback();
 
     } else {
       // Handle incorrect answer (subtract time, etc.)
       timerCount = timerCount - 10
       var sound = document.getElementById('sound bad');
       sound.play();
+      FeedbackElement.textContent = "Incorrect"
+      showFeedback();
     }
     currentQuestionIndex++;
     // Checks if there are more questions
@@ -71,7 +82,6 @@ function handleAnswerClick(selectedAnswer) {
       endQuiz();
     }
   }
-
 
 
 
