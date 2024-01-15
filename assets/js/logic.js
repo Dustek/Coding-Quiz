@@ -28,7 +28,6 @@ function startQuiz() {
 
 //Displays question and answer buttons
 function displayQuestion() {
-    console.log("questions displayed!")
     var currentQuestion = quizQuestions[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     // Clear previous choices
@@ -37,29 +36,38 @@ function displayQuestion() {
         var choice = currentQuestion.choices[index];
         var button = document.createElement('button');
         button.textContent = choice;
-        button.addEventListener('click', function () {
-          handleAnswerClick(choice);
-        });
+        // Had to use IIFE to avoid bug in javascript that incorrectly selected answer
+        (function (currentChoice) {
+            button.addEventListener('click', function () {
+                handleAnswerClick(currentChoice);
+            });
+        })(choice);
+
         choicesContainer.appendChild(button);
       }
 }
 
 function handleAnswerClick(selectedAnswer) {
     var currentQuestion = quizQuestions[currentQuestionIndex];
+    console.log("Current Question:", currentQuestion);
+    console.log("Selected Answer:", selectedAnswer);
+    console.log("Correct Answer:", currentQuestion.correctAnswer);
   
     if (selectedAnswer === currentQuestion.correctAnswer) {
-      // Handle correct answer
-      console.log("Correct!");
+      var sound = document.getElementById('sound good');
+      sound.play();
+
     } else {
       // Handle incorrect answer (subtract time, etc.)
       timerCount = timerCount - 10
+      var sound = document.getElementById('sound bad');
+      sound.play();
     }
     currentQuestionIndex++;
     // Checks if there are more questions
     if (currentQuestionIndex < quizQuestions.length) {
       displayQuestion();
     } else {
-        //TODO add end to quizz
       endQuiz();
     }
   }
