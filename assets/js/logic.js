@@ -116,6 +116,7 @@ function saveScoreToLocalStorage(scoreData){
   existingScores.push(scoreData)
   existingScores.sort((a, b) => b.score - a.score);
   localStorage.setItem('scores', JSON.stringify(existingScores))
+  window.location.href = 'highscores.html'
 }
 
 
