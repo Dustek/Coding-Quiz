@@ -15,8 +15,8 @@ var currentQuestionIndex = 0;
 var timer;
 var timerCount; 
 
+// Starts quizz when button clicked
 startElement.addEventListener('click', startQuiz);
-
 function startQuiz() {
   timerCount = 100;
   startTimer()
@@ -25,7 +25,7 @@ function startQuiz() {
   QuestionContainerElement.classList.remove('hide')
 }
 
-
+// Handles text feedback on answers
 function showFeedback(){
   FeedbackElement.classList.remove("hide")
   setTimeout(() => {
@@ -39,6 +39,7 @@ function displayQuestion() {
     questionTitle.textContent = currentQuestion.question;
     // Clear previous choices
     choicesContainer.innerHTML = '';
+    // Generates question and answers based on quizz Questions array
     for (let index = 0; index < currentQuestion.choices.length; index++) {
         var choice = currentQuestion.choices[index];
         var button = document.createElement('button');
@@ -49,17 +50,12 @@ function displayQuestion() {
                 handleAnswerClick(currentChoice);
             });
         })(choice);
-
         choicesContainer.appendChild(button);
       }
 }
-
+// 
 function handleAnswerClick(selectedAnswer) {
     var currentQuestion = quizQuestions[currentQuestionIndex];
-    console.log("Current Question:", currentQuestion);
-    console.log("Selected Answer:", selectedAnswer);
-    console.log("Correct Answer:", currentQuestion.correctAnswer);
-  
     if (selectedAnswer === currentQuestion.correctAnswer) {
       var sound = document.getElementById('sound good');
       sound.play();
