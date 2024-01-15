@@ -80,29 +80,29 @@ function handleAnswerClick(selectedAnswer) {
   }
 
 
-var userscore
-function endQuiz(){
-  QuestionContainerElement.classList.add('hide')
-  EndElement.classList.remove('hide')
-  clearInterval(timer)
-  var userScore = timerCount
-  finalScoreElement.textContent = userScore
+  var userScore
+  function endQuiz(){
+    QuestionContainerElement.classList.add('hide')
+    EndElement.classList.remove('hide')
+    clearInterval(timer)
+    userScore = timerCount
+    finalScoreElement.textContent = userScore
 
-}
-
-submitButton.addEventListener('click', handleScoreSubmission);
-
-function handleScoreSubmission() {
-  var userInitials = initialsInput.value.trim();
-  if (userInitials === '') {
-    alert('Please enter your initials.');
-    return;
   }
-    var scoreData = {
-      initials: userInitials,
-      score: userscore,
-    };
-    saveScoreToLocalStorage(scoreData);
+
+  submitButton.addEventListener('click', handleScoreSubmission);
+
+  function handleScoreSubmission() {
+    var userInitials = initialsInput.value.trim();
+    if (userInitials === '') {
+      alert('Please enter your initials.');
+      return;
+    }
+      var scoreData = {
+        initials: userInitials,
+        score: userScore,
+      };
+      saveScoreToLocalStorage(scoreData);
   }
 
 function saveScoreToLocalStorage(scoreData){
