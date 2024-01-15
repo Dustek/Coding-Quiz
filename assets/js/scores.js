@@ -15,5 +15,6 @@ scoresElement.appendChild(ol)
 
 var clearButton = document.getElementById("clear")
 clearButton.addEventListener("click", function(){
-localStorage.removeItem('scores');;
+localStorage.removeItem('scores');
+scoresElement.innerHTML = "";
 })
